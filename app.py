@@ -27,7 +27,7 @@ response = client.chat.completions.create(
 reply = response.choices[0].message.content.strip()
 
 
-    print("GPT:", reply)
+print("GPT:", reply)
 
     # Send reply to WhatsApp
     twilio_response = MessagingResponse()
