@@ -14,17 +14,18 @@ def webhook():
     incoming_msg = request.values.get('Body', '').strip()
     print("User:", incoming_msg)
 
-    # Get GPT response
+# Get GPT response
 client = openai.OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 
-    response = client.chat.completions.create(
-        model="gpt-3.5-turbo",
-        messages=[
-            {"role": "user", "content": incoming_msg}
-        ]
-    )
+response = client.chat.completions.create(
+    model="gpt-3.5-turbo",
+    messages=[
+        {"role": "user", "content": incoming_msg}
+    ]
+)
 
 reply = response.choices[0].message.content.strip()
+
 
     print("GPT:", reply)
 
