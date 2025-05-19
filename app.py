@@ -15,14 +15,17 @@ def webhook():
     print("User:", incoming_msg)
 
     # Get GPT response
-    response = openai.ChatCompletion.create(
+client = openai.OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
+
+    response = client.chat.completions.create(
         model="gpt-3.5-turbo",
         messages=[
-            {"role": "system", "content": "You are a helpful assistant."},
             {"role": "user", "content": incoming_msg}
         ]
     )
-    reply = response.choices[0].message.content.strip()
+
+reply = response.choices[0].message.content.strip()
+
     print("GPT:", reply)
 
     # Send reply to WhatsApp
@@ -33,3 +36,4 @@ def webhook():
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=10000)
+
